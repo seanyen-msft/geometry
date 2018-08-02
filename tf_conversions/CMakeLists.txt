@@ -19,7 +19,7 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIRS} ${oroc
 # Needed due to no full filename in orocos_kdl pkg-config export
 link_directories(${orocos_kdl_LIBRARY_DIRS})
 
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} STATIC
   src/tf_kdl.cpp
   src/tf_eigen.cpp
 )
