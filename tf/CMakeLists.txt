@@ -40,7 +40,7 @@ catkin_package(
   CATKIN_DEPENDS geometry_msgs message_filters message_runtime roscpp sensor_msgs std_msgs tf2_ros rosconsole
 )
 
-add_library(${PROJECT_NAME} STATIC
+add_library(${PROJECT_NAME}
     src/cache.cpp
     src/tf.cpp
     src/transform_broadcaster.cpp
@@ -128,10 +128,12 @@ install(DIRECTORY include/${PROJECT_NAME}/
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
-install(TARGETS ${PROJECT_NAME} tf_echo tf_empty_listener tf_change_notifier tf_monitor static_transform_publisher
-    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+install(TARGETS ${PROJECT_NAME}
+    DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+)
+
+install(TARGETS tf_echo tf_empty_listener tf_change_notifier tf_monitor static_transform_publisher
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 # Install rosrun-able scripts
