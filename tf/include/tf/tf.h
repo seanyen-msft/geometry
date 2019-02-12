@@ -49,6 +49,12 @@
 #include <tf2_ros/buffer.h>
 #include <ros/macros.h>
 
+// Boost winapi.h includes winerror.h. Subsequently NO_ERROR gets defined
+// and which conflicts with tf::NO_ERROR.
+#if defined(_WIN32) && defined(NO_ERROR)
+#undef NO_ERROR
+#endif
+
 // Import/export for windows dll's and visibility for gcc shared libraries.
 #ifdef ROS_BUILD_SHARED_LIBS // ros is being built around shared libraries
   #ifdef tf_EXPORTS // we are building a shared lib/dll
@@ -71,7 +77,7 @@ std::string strip_leading_slash(const std::string& frame_name);
 /** \deprecated This has been renamed to tf::resolve */
 ROS_DEPRECATED static inline std::string remap(const std::string& prefix, const std::string& frame_name) { return tf::resolve(prefix, frame_name);} ;
 
-enum ErrorValues { NO_ERRORS = 0, LOOKUP_ERROR, CONNECTIVITY_ERROR, EXTRAPOLATION_ERROR};
+enum ErrorValues { NO_ERROR = 0, LOOKUP_ERROR, CONNECTIVITY_ERROR, EXTRAPOLATION_ERROR};
 
 /** \brief An internal representation of transform chains
  *
